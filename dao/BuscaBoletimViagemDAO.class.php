@@ -5,14 +5,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once 'Conn.class.php';
+require_once 'ConnDEV.class.php';
 
 /**
  * Description of BuscaBoletimDAO
  *
  * @author anderson
  */
-class BuscaBoletimViagemDAO extends Conn {
+class BuscaBoletimViagemDAO extends ConnDEV {
     /** @var PDOStatement */
 
     /** @var PDOStatement */

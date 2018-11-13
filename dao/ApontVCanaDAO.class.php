@@ -5,14 +5,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once 'Conn.class.php';
+require_once 'ConnDEV.class.php';
 
 /**
  * Description of InsMotoMecDAO
  *
  * @author anderson
  */
-class ApontVCanaDAO extends Conn {
+class ApontVCanaDAO extends ConnDEV {
     //put your code here
 
     /** @var PDOStatement */

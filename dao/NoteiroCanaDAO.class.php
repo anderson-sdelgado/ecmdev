@@ -5,13 +5,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once 'Conn.class.php';
+require_once 'ConnDEV.class.php';
 /**
  * Description of MotoristaDAO
  *
  * @author anderson
  */
-class NoteiroCanaDAO extends Conn {
+class NoteiroCanaDAO extends ConnDEV {
     //put your code here
     
     /** @var PDOStatement */

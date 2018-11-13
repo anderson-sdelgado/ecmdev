@@ -5,13 +5,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once 'Conn.class.php';
+require_once 'ConnDEV.class.php';
 /**
  * Description of ItemChecklistDAO
  *
  * @author anderson
  */
-class ItemChecklistDAO extends Conn {
+class ItemChecklistDAO extends ConnDEV {
     //put your code here
     
     /** @var PDOStatement */
