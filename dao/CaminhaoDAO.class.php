@@ -23,7 +23,8 @@ class CaminhaoDAO extends ConnDEV {
     public function dados() {
 
         $select = " SELECT "
-                    . " NRO AS \"idCaminhao\" "
+                    . " EQUIP_ID AS \"idCaminhao\" "
+                    . " , NRO AS \"codCaminhao\" "
                     . " , TIPO_CLASSE AS \"tipoCaminhao\" "
                 . " FROM "
                     . " USINAS.V_INTEGRA_EQUIPAMENTO "

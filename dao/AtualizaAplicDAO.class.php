@@ -5,14 +5,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once 'ConnDev.class.php';
+require_once 'ConnDEV.class.php';
 
 /**
  * Description of AtualizaAplicDAO
  *
  * @author anderson
  */
-class AtualizaAplicDAO extends ConnDev {
+class AtualizaAplicDAO extends ConnDEV {
     //put your code here
 
     /** @var PDOStatement */
@@ -29,7 +29,7 @@ class AtualizaAplicDAO extends ConnDev {
             $va = $d->versaoAtual;
         }
 
-        $retorno = 'N';
+        $retorno = 'N_NAC';
 
         $select = "SELECT "
                 . " COUNT(*) AS QTDE "
@@ -68,7 +68,7 @@ class AtualizaAplicDAO extends ConnDev {
         } else {
 
             $select = " SELECT "
-                    . " VERSAO_NOVA "
+                    . " VERSAO_NOVA"
                     . " FROM "
                     . " ECM_ATUALIZACAO "
                     . " WHERE "
@@ -87,14 +87,20 @@ class AtualizaAplicDAO extends ConnDev {
                 $retorno = 'S';
             } else {
 
-                $retorno = 'N';
-                
                 $select = " SELECT "
-                        . " VERSAO_ATUAL "
+                        . " PA.VERSAO_ATUAL"
+                        . ", CASE "
+                        . " WHEN NVL(ACM.EQUIP_NRO, 0) = 0 "
+                        . " THEN 0 "
+                        . " ELSE 1 "
+                        . " END AS VERIF_CHECKLIST "
                         . " FROM "
-                        . " ECM_ATUALIZACAO "
+                        . " ECM_ATUALIZACAO PA "
+                        . " , (SELECT EQUIP_NRO FROM ATUALIZA_CHECKLIST_MOBILE WHERE DT_MOBILE IS NULL) ACM "
                         . " WHERE "
-                        . " EQUIP_ID = " . $equip;
+                        . " PA.EQUIP_ID = " . $equip
+                        . " AND " 
+                        . " PA.EQUIP_ID = ACM.EQUIP_NRO(+) ";
 
                 $this->Read = $this->Conn->prepare($select);
                 $this->Read->setFetchMode(PDO::FETCH_ASSOC);
@@ -104,6 +110,7 @@ class AtualizaAplicDAO extends ConnDev {
                 $vab = '';
                 foreach ($result as $item) {
                     $vab = $item['VERSAO_ATUAL'];
+                    $vcl = $item['VERIF_CHECKLIST'];
                 }
 
                 if (strcmp($va, $vab) <> 0) {
@@ -117,8 +124,11 @@ class AtualizaAplicDAO extends ConnDev {
 
                     $this->Create = $this->Conn->prepare($sql);
                     $this->Create->execute();
+                } else {
+                    if($vcl == 1){
+                        $retorno = 'N_AC';
+                    }
                 }
-
             }
         }
 
