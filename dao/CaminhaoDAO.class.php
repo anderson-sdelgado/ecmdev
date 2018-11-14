@@ -23,13 +23,17 @@ class CaminhaoDAO extends ConnDEV {
     public function dados() {
 
         $select = " SELECT "
-                    . " EQUIP_ID AS \"idCaminhao\" "
-                    . " , NRO AS \"codCaminhao\" "
-                    . " , TIPO_CLASSE AS \"tipoCaminhao\" "
+                    . " E.EQUIP_ID AS \"idCaminhao\" "
+                    . " , E.NRO AS \"codCaminhao\" "
+                    . " , E.TIPO_CLASSE AS \"tipoCaminhao\" "
+                    . " , NVL(C.PLMANPREV_ID, 0) AS \"idChecklist\" "
                 . " FROM "
-                    . " USINAS.V_INTEGRA_EQUIPAMENTO "
+                    . " USINAS.V_INTEGRA_EQUIPAMENTO E "
+                    . " , USINAS.V_EQUIP_PLANO_CHECK C "
                 . " WHERE "
-                    . " TIPO_CLASSE IN (1, 6, 5) "
+                    . " E.TIPO_CLASSE IN (1, 6, 5) "
+                    . " AND "
+                    . " E.NRO_EQUIP = C.EQUIP_NRO(+) "
                 . " ORDER BY "
                     . " NRO "
                 . " DESC ";

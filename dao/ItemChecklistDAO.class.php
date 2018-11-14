@@ -24,12 +24,11 @@ class ItemChecklistDAO extends ConnDEV {
 
         $select = " SELECT "
                         . " ITMANPREV_ID AS \"idItemChecklist\" "
+                        . " , PLMANPREV_ID AS \"idChecklist\" "
                         . " , SEQ AS \"seqItemChecklist\" "
                         . " , CARACTER(PROC_OPER) AS \"descrItemChecklist\" "
                     . " FROM "
                         . " V_ITEM_PLANO_CHECK "
-                    . " WHERE "
-                        . " PLMANPREV_ID = 3522 "
                     . " ORDER BY "
                             . " SEQ "
                     . " ASC ";
