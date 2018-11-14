@@ -36,7 +36,8 @@ class VerLiberacaoDAO extends ConnDEV {
                 . " USINAS.V_INTEGRA_LIBERACAO "
                 . " WHERE "
                 . " NRO_LIB_OS = " . $lib . " "
-                . " AND NRO_OS = " . $os . " ";
+                . " AND "
+                . " NRO_OS = " . $os . " ";
 
 
         $this->Conn = parent::getConn();

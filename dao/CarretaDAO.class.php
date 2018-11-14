@@ -22,20 +22,6 @@ class CarretaDAO extends ConnDEV {
 
     public function dados() {
 
-//        $select = " SELECT "
-//                        . " NRO AS \"idCarreta\" "
-//                        . " , TIPO_CLASSE AS \"tipoCarreta\" "
-//                    . " FROM "
-//                        . " USINAS.V_INTEGRA_EQUIPAMENTO "
-//                    . " WHERE "
-//                        . " (TIPO_CLASSE IN (4, 8) OR NRO_CLASSE = 212) "
-//                        . " AND "
-//                        . " DATA_DESATIVACAO IS NULL "
-//                    . " ORDER BY "
-//                        . " NRO "
-//                    . " DESC ";
-        
-        
         $select = " SELECT " 
                         . " NRO AS \"idCarreta\" "
                         . " , " 

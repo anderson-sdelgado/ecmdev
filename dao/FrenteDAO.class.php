@@ -23,13 +23,17 @@ class FrenteDAO extends ConnDEV {
     public function dados() {
 
         $select = " SELECT "
-                    . " NUM AS \"codigoFrente\" "
-                    . " , DESCRICAO AS \"nomeFrente\" "
-                    . " , TIPO AS \"tipoFrente\" "
+                    . " FRENTE_ID AS \"idFrente\" "
+                    . " , CD AS \"codFrente\" "
+                    . " , DESCR AS \"descrFrente\" "
                 . " FROM "
-                    . " FRENTEVIAGEMS "
+                    . " USINAS.FRENTE "
+                . " WHERE "
+                    . " ATIVO = 1 "
+                    . " AND "
+                    . " TP_FRENTE = 3 "
                 . " ORDER BY "
-                    . " NUM "
+                    . " CD "
                 . " DESC ";
         
         $this->Conn = parent::getConn();

@@ -31,7 +31,7 @@ class MotoMecDAO extends ConnDEV {
                     . " , FUNCAO AS \"funcaoMotoMec\" "
                     . " , CARGO AS \"cargoMotoMec\" "
                 . " FROM "
-                    . " OPMOTOMECA "
+                    . " ECM_OPER_MM "
                 . " ORDER BY "
                     . " CODIGO "
                 . " DESC ";

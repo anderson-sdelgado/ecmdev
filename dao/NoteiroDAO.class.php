@@ -11,7 +11,7 @@ require_once 'ConnDEV.class.php';
  *
  * @author anderson
  */
-class NoteiroCanaDAO extends ConnDEV {
+class NoteiroDAO extends ConnDEV {
     //put your code here
     
     /** @var PDOStatement */
@@ -23,11 +23,16 @@ class NoteiroCanaDAO extends ConnDEV {
     public function dados() {
 
         $select = " SELECT "
-                    . " MATRICULA AS \"codNoteiroCana\" "
+                    . " FM.FUNC_CD AS \"codNoteiro\" "
                 . " FROM "
-                    . " USINAS.V_INTEGRA_NOTEIRO "
+                    . " V_SIMOVA_TURMA_FUNC TF "
+                    . " , V_SIMOVA_FUNC_MOBRA FM "
+                . " WHERE "
+                    . " TF.TURMA_ID <> 111 "
+                    . " AND "
+                    . " TF.FUNC_ID = FM.FUNC_ID  "
                 . " ORDER BY "
-                    . " MATRICULA "
+                    . " FM.FUNC_CD "
                 . " DESC ";
         
         $this->Conn = parent::getConn();

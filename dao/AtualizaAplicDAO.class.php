@@ -34,7 +34,7 @@ class AtualizaAplicDAO extends ConnDev {
         $select = "SELECT "
                 . " COUNT(*) AS QTDE "
                 . " FROM "
-                . " PMM_ATUALIZACAO "
+                . " ECM_ATUALIZACAO "
                 . " WHERE "
                 . " EQUIP_ID = " . $equip;
 
@@ -50,7 +50,7 @@ class AtualizaAplicDAO extends ConnDev {
 
         if ($v == 0) {
 
-            $sql = "INSERT INTO PMM_ATUALIZACAO ("
+            $sql = "INSERT INTO ECM_ATUALIZACAO ("
                     . " EQUIP_ID "
                     . " , VERSAO_ATUAL "
                     . " , VERSAO_NOVA "
@@ -70,7 +70,7 @@ class AtualizaAplicDAO extends ConnDev {
             $select = " SELECT "
                     . " VERSAO_NOVA "
                     . " FROM "
-                    . " PMM_ATUALIZACAO "
+                    . " ECM_ATUALIZACAO "
                     . " WHERE "
                     . " EQUIP_ID = " . $equip;
 
@@ -92,7 +92,7 @@ class AtualizaAplicDAO extends ConnDev {
                 $select = " SELECT "
                         . " VERSAO_ATUAL "
                         . " FROM "
-                        . " PMM_ATUALIZACAO "
+                        . " ECM_ATUALIZACAO "
                         . " WHERE "
                         . " EQUIP_ID = " . $equip;
 
@@ -108,7 +108,7 @@ class AtualizaAplicDAO extends ConnDev {
 
                 if (strcmp($va, $vab) <> 0) {
 
-                    $sql = "UPDATE PMM_ATUALIZACAO "
+                    $sql = "UPDATE ECM_ATUALIZACAO "
                             . " SET "
                             . " VERSAO_ATUAL = TRIM(TO_CHAR(" . $va . ", '99999999D99'))"
                             . " , DTHR_ULT_ATUAL = SYSDATE "
