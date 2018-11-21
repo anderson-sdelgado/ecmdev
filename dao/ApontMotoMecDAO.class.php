@@ -34,7 +34,7 @@ class ApontMotoMecDAO extends ConnDEV {
                     . " , ATIV"
                     . " ) "
                     . " VALUES (  "
-                    . " EMC_APONTAMENTO_MM_SEQ.NEXTAL "
+                    . " ECM_APONTAMENTO_MM_SEQ.NEXTVAL "
                     . " , " . $d->veic . ""
                     . " , " . $d->motorista . " "
                     . " , " . $d->opcor . " "

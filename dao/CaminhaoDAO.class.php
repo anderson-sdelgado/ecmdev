@@ -33,7 +33,7 @@ class CaminhaoDAO extends ConnDEV {
                 . " WHERE "
                     . " E.TIPO_CLASSE IN (1, 6, 5) "
                     . " AND "
-                    . " E.NRO_EQUIP = C.EQUIP_NRO(+) "
+                    . " E.NRO = C.EQUIP_NRO(+) "
                 . " ORDER BY "
                     . " NRO "
                 . " DESC ";

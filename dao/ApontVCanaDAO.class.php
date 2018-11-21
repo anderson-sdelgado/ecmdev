@@ -35,7 +35,7 @@ class ApontVCanaDAO extends ConnDEV {
                     . " , NOTEIRO, TURNO "
                     . " ) "
                     . " VALUES ( "
-                    . " , ECM_PRE_CEC_CANA_SEQ.NEXTAL "
+                    . " , ECM_PRE_CEC_CANA_SEQ.NEXTVAL "
                     . " , " . $d->cam . " "
                     . " , " . $this->verifValor($d->libCam) . " "
                     . " , " . $this->verifValor($d->maqCam) . " "
