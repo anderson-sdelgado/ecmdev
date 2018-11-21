@@ -25,8 +25,21 @@ class ApontMotoMecDAO extends ConnDEV {
 
         foreach ($dados as $d) {
 
-            $sql = " INSERT INTO APONTA_MOTOMEC VALUES (" . $d->veic . ", " . $d->motorista . ", " . $d->opcor . ", "
-                    . " TO_DATE('" . $d->dihi . "','DD/MM/YYYY HH24:MI'), " . $d->caux . ", 1, 1, 0, 0, 0)";
+            $sql = " INSERT INTO ECM_APONTAMENTO_MM "
+                    . " ( ID "
+                    . " , CAM "
+                    . " , MOTO "
+                    . " , OPCOR "
+                    . " , DTHR"
+                    . " , ATIV"
+                    . " ) "
+                    . " VALUES (  "
+                    . " EMC_APONTAMENTO_MM_SEQ.NEXTAL "
+                    . " , " . $d->veic . ""
+                    . " , " . $d->motorista . " "
+                    . " , " . $d->opcor . " "
+                    . " , TO_DATE('" . $d->dihi . "','DD/MM/YYYY HH24:MI') "
+                    . " , " . $d->caux . " )";
 
             $this->Conn = parent::getConn();
             $this->Create = $this->Conn->prepare($sql);
