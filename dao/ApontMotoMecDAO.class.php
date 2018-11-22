@@ -44,6 +44,7 @@ class ApontMotoMecDAO extends ConnDEV {
             $this->Conn = parent::getConn();
             $this->Create = $this->Conn->prepare($sql);
             $this->Create->execute();
+            
         }
     }
 
