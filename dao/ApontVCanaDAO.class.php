@@ -27,15 +27,15 @@ class ApontVCanaDAO extends ConnDEV {
 
             $insert = " INSERT INTO "
                     . " ECM_PRE_CEC_CANA "
-                    . " ( ID, EQUIP, LIB_EQUIP, COLHED_EQUIP, OPER_COLHED_EQUIP, COLABORADOR, "
-                    . " , CARRETA_1, LIB_CARRETA_1, COLHED_CARRETA_1, OPER_COLHED_CARRETA_1, "
-                    . " , CARRETA_2, LIB_CARRETA_2, COLHED_CARRETA_2, OPER_COLHED_CARRETA_2, "
-                    . " , CARRETA_3, LIB_CARRETA_3, COLHED_CARRETA_3, OPER_COLHED_CARRETA_3, "
-                    . " , DATA_HORA_CHEGADA_CAMPO, DATA_HORA_SAIDA_CAMPO, DATA_HORA_SAIDA_USINA, "
+                    . " ( ID, EQUIP, LIB_EQUIP, COLHED_EQUIP, OPER_COLHED_EQUIP, COLABORADOR "
+                    . " , CARRETA_1, LIB_CARRETA_1, COLHED_CARRETA_1, OPER_COLHED_CARRETA_1 "
+                    . " , CARRETA_2, LIB_CARRETA_2, COLHED_CARRETA_2, OPER_COLHED_CARRETA_2 "
+                    . " , CARRETA_3, LIB_CARRETA_3, COLHED_CARRETA_3, OPER_COLHED_CARRETA_3 "
+                    . " , DATA_HORA_CHEGADA_CAMPO, DATA_HORA_SAIDA_CAMPO, DATA_HORA_SAIDA_USINA "
                     . " , NOTEIRO, TURNO "
                     . " ) "
                     . " VALUES ( "
-                    . " , ECM_PRE_CEC_CANA_SEQ.NEXTVAL "
+                    . " ECM_PRE_CEC_CANA_SEQ.NEXTVAL "
                     . " , " . $d->cam . " "
                     . " , " . $this->verifValor($d->libCam) . " "
                     . " , " . $this->verifValor($d->maqCam) . " "
@@ -60,7 +60,7 @@ class ApontVCanaDAO extends ConnDEV {
                     . " , " . $this->verifValor($d->turno) . " "
                     . " ) ";
 
-            //$this->Conn = parent::getConn();
+            $this->Conn = parent::getConn();
             $this->Create = $this->Conn->prepare($insert);
             $this->Create->execute();
             

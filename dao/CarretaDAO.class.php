@@ -22,8 +22,9 @@ class CarretaDAO extends ConnDEV {
 
     public function dados() {
 
-        $select = " SELECT " 
-                        . " NRO AS \"idCarreta\" "
+        $select = " SELECT "
+                        . " EQUIP_ID AS \"idCarreta\" "
+                        . " , NRO AS \"codCarreta\" "
                         . " , " 
                         . " CASE " 
                         . " WHEN NRO_CLASSE = 216 THEN 8 "
