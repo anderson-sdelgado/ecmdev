@@ -23,14 +23,13 @@ class TurnoDAO extends ConnDEV {
     public function dados() {
 
         $select = " SELECT "
-                    . " CODIGO AS \"idTurno\" "
-                    . " , DESCRICAO AS \"descTurno\" "
+                . " TURNOTRAB_ID AS \"idTurno\" "
+                . " , TPTUREQUIP_CD AS \"codTurno\" "
+                . " , NRO_TURNO AS \"nroTurno\" "
+                . " , 'TURNO ' || NRO_TURNO || ': ' || HR_INI || ' - ' || HR_FIM AS \"descTurno\" "
                 . " FROM "
-                    . " ECM_TURNO "
-                . " ORDER BY "
-                    . " CODIGO "
-                . " ASC ";
-        
+                . " USINAS.V_SIMOVA_TURNO_EQUIP_NEW ";
+
         $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);

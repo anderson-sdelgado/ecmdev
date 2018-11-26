@@ -27,6 +27,7 @@ class CaminhaoDAO extends ConnDEV {
                     . " , E.NRO AS \"codCaminhao\" "
                     . " , E.TIPO_CLASSE AS \"tipoCaminhao\" "
                     . " , NVL(C.PLMANPREV_ID, 0) AS \"idChecklist\" "
+                    . " , E.TPTUREQUIP_CD AS \"codTurno\" "
                 . " FROM "
                     . " USINAS.V_INTEGRA_EQUIPAMENTO E "
                     . " , USINAS.V_EQUIP_PLANO_CHECK C "
