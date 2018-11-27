@@ -23,18 +23,44 @@ class ApontCheckListDAO extends ConnDEV {
 
     public function salvarDados($dadosCab, $dadosItem) {
 
+        $this->Conn = parent::getConn();
+
         foreach ($dadosCab as $d) {
 
             $turno = 'null';
+            $data = '';
 
-            $this->Conn = parent::getConn();
+            $select = " SELECT "
+                    . " COUNT(ID) AS VERDATA "
+                    . " INTO "
+                    . " V_HORARIO "
+                    . " FROM "
+                    . " PERIODO_HORARIO_VERAO "
+                    . " WHERE "
+                    . " TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI') BETWEEN  DATA_INICIAL AND DATA_FINAL";
+
+            $this->Read = $this->Conn->prepare($select);
+            $this->Read->setFetchMode(PDO::FETCH_ASSOC);
+            $this->Read->execute();
+            $result = $this->Read->fetchAll();
+
+            foreach ($result as $item) {
+                $v = $item['VERDATA'];
+            }
+
+            if ($v == 0) {
+                $data = ' - 3/24)';
+            }
+            else{
+                $data = ' - 2/24)';
+            }
 
             $select = " SELECT "
                     . " COUNT(*) AS QTDE "
                     . " FROM "
                     . " BOLETIM_CHECK "
                     . " WHERE "
-                    . " DT = TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI') "
+                    . " DT = (TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI') " . $data 
                     . " AND "
                     . " EQUIP_NRO = " . $d->equipCabecCheckList . " ";
 
@@ -73,7 +99,7 @@ class ApontCheckListDAO extends ConnDEV {
                         . " VALUES ( "
                         . " " . $d->equipCabecCheckList . " "
                         . " , " . $d->funcCabecCheckList . ""
-                        . " , TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI') "
+                        . " , (TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI')" . $data
                         . " , " . $turno . ")";
 
                 $this->Create = $this->Conn->prepare($sql);
@@ -84,7 +110,7 @@ class ApontCheckListDAO extends ConnDEV {
                         . " FROM "
                         . " BOLETIM_CHECK "
                         . " WHERE "
-                        . " DT = TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI') "
+                        . " DT = (TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI')" . $data
                         . " AND "
                         . " EQUIP_NRO = " . $d->equipCabecCheckList . " ";
 
@@ -94,7 +120,7 @@ class ApontCheckListDAO extends ConnDEV {
                 $result = $this->Read->fetchAll();
 
                 foreach ($result as $item) {
-                    $qtdeCab = $item['ID'];
+                    $idCab = $item['ID'];
                 }
 
                 foreach ($dadosItem as $i) {
@@ -104,17 +130,17 @@ class ApontCheckListDAO extends ConnDEV {
                         $grupo = '';
                         $questao = '';
 
-                        $select = " select "
-                                . " vipc.itmanprev_id as id, "
-                                . " CARACTER(vipc.proc_oper) as questao, "
-                                . " CARACTER(vcc.descr) as grupo "
-                                . " from "
-                                . " v_item_plano_check vipc "
-                                . " , v_componente_check vcc "
-                                . " where "
-                                . " vipc.itmanprev_id = " . $i->idItItemCheckList . " "
-                                . " and "
-                                . " vipc.componente_id = vcc.componente_id ";
+                        $select = " SELECT "
+                                . " VIPC.ITMANPREV_ID AS ID, "
+                                . " CARACTER(VIPC.PROC_OPER) AS QUESTAO, "
+                                . " CARACTER(VCC.DESCR) AS GRUPO "
+                                . " FROM "
+                                . " V_ITEM_PLANO_CHECK VIPC "
+                                . " , V_COMPONENTE_CHECK VCC "
+                                . " WHERE "
+                                . " VIPC.ITMANPREV_ID = " . $i->idItItemCheckList . " "
+                                . " AND "
+                                . " VIPC.COMPONENTE_ID = VCC.COMPONENTE_ID ";
 
                         $this->Read = $this->Conn->prepare($select);
                         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
@@ -127,16 +153,12 @@ class ApontCheckListDAO extends ConnDEV {
                             $grupo = $inf['GRUPO'];
                         }
 
-                        if (!isset($i->opcaoItemCheckList) || empty($i->opcaoItemCheckList)) {
-                            $i->opcaoItemCheckList = 0;
-                        }
-
                         $select = " SELECT "
                                 . " COUNT(*) AS QTDE "
                                 . " FROM "
                                 . " ITEM_BOLETIM_CHECK "
                                 . " WHERE "
-                                . " ID_BOLETIM = " . $qtdeCab . " "
+                                . " ID_BOLETIM = " . $idCab . " "
                                 . " AND "
                                 . " ITMANPREV_ID = " . $i->idItItemCheckList . " ";
 
@@ -159,7 +181,7 @@ class ApontCheckListDAO extends ConnDEV {
                                     . " , ITMANPREV_ID "
                                     . " ) "
                                     . " VALUES ( "
-                                    . " " . $qtdeCab . " "
+                                    . " " . $idCab . " "
                                     . " , '" . $grupo . "' "
                                     . " , '" . $questao . "' "
                                     . " , " . $i->opcaoItemCheckList . " "
@@ -177,7 +199,7 @@ class ApontCheckListDAO extends ConnDEV {
                         . " FROM "
                         . " BOLETIM_CHECK "
                         . " WHERE "
-                        . " DT = TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI') "
+                        . " DT = (TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI') " . $data
                         . " AND "
                         . " EQUIP_NRO = " . $d->equipCabecCheckList . " ";
 
@@ -187,7 +209,7 @@ class ApontCheckListDAO extends ConnDEV {
                 $result = $this->Read->fetchAll();
 
                 foreach ($result as $item) {
-                    $qtdeCab = $item['ID'];
+                    $idCab = $item['ID'];
                 }
 
                 foreach ($dadosItem as $i) {
@@ -197,17 +219,17 @@ class ApontCheckListDAO extends ConnDEV {
                         $grupo = '';
                         $questao = '';
 
-                        $select = " select "
-                                . " vipc.itmanprev_id as id, "
-                                . " CARACTER(vipc.proc_oper) as questao, "
-                                . " CARACTER(vcc.descr) as grupo "
-                                . " from "
-                                . " v_item_plano_check vipc "
-                                . " , v_componente_check vcc "
-                                . " where "
-                                . " vipc.itmanprev_id = " . $i->idItItemCheckList . " "
-                                . " and "
-                                . " vipc.componente_id = vcc.componente_id ";
+                        $select = " SELECT "
+                                . " VIPC.ITMANPREV_ID AS ID, "
+                                . " CARACTER(VIPC.PROC_OPER) AS QUESTAO, "
+                                . " CARACTER(VCC.DESCR) AS GRUPO "
+                                . " FROM "
+                                . " V_ITEM_PLANO_CHECK VIPC "
+                                . " , V_COMPONENTE_CHECK VCC "
+                                . " WHERE "
+                                . " VIPC.ITMANPREV_ID = " . $i->idItItemCheckList . " "
+                                . " AND "
+                                . " VIPC.COMPONENTE_ID = VCC.COMPONENTE_ID ";
 
                         $this->Read = $this->Conn->prepare($select);
                         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
@@ -220,16 +242,12 @@ class ApontCheckListDAO extends ConnDEV {
                             $grupo = $inf['GRUPO'];
                         }
 
-                        if (!isset($i->opcaoItemCheckList) || empty($i->opcaoItemCheckList)) {
-                            $i->opcaoItemCheckList = 0;
-                        }
-
                         $select = " SELECT "
                                 . " COUNT(*) AS QTDE "
                                 . " FROM "
                                 . " ITEM_BOLETIM_CHECK "
                                 . " WHERE "
-                                . " ID_BOLETIM = " . $qtdeCab . " "
+                                . " ID_BOLETIM = " . $idCab . " "
                                 . " AND "
                                 . " ITMANPREV_ID = " . $i->idItItemCheckList . " ";
 
@@ -252,7 +270,7 @@ class ApontCheckListDAO extends ConnDEV {
                                     . " , ITMANPREV_ID "
                                     . " ) "
                                     . " VALUES ( "
-                                    . " " . $qtdeCab . " "
+                                    . " " . $idCab . " "
                                     . " , '" . $grupo . "' "
                                     . " , '" . $questao . "' "
                                     . " , " . $i->opcaoItemCheckList . " "
@@ -264,7 +282,6 @@ class ApontCheckListDAO extends ConnDEV {
                     }
                 }
             }
-            
         }
     }
 
