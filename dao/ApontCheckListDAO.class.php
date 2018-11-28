@@ -32,6 +32,8 @@ class ApontCheckListDAO extends ConnDEV {
 
             $select = " SELECT "
                     . " COUNT(ID) AS VERDATA "
+                    . " INTO "
+                    . " V_HORARIO "
                     . " FROM "
                     . " PERIODO_HORARIO_VERAO "
                     . " WHERE "
