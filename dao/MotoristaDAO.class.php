@@ -11,7 +11,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class MotoristaDAO extends ConnDEV {
+class MotoristaDAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */

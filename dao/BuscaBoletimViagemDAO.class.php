@@ -12,7 +12,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class BuscaBoletimViagemDAO extends ConnDEV {
+class BuscaBoletimViagemDAO extends Conn {
     /** @var PDOStatement */
 
     /** @var PDOStatement */

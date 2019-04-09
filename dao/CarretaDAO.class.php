@@ -11,7 +11,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class CarretaDAO extends ConnDEV {
+class CarretaDAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */
@@ -34,8 +34,8 @@ class CarretaDAO extends ConnDEV {
                         . " USINAS.V_INTEGRA_EQUIPAMENTO "
                     . " WHERE "
                         . " (TIPO_CLASSE IN (4, 8) OR NRO_CLASSE = 212) "
-                    . " AND "
-                        . " DATA_DESATIVACAO IS NULL "
+                    //. " AND "
+                        //. " DATA_DESATIVACAO IS NULL "
                     . " ORDER BY NRO DESC "; 
         
         

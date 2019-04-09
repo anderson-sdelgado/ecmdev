@@ -12,7 +12,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class VerLiberacaoDAO extends ConnDEV {
+class VerLiberacaoDAO extends Conn {
     //put your code here
 
     /** @var PDOStatement */

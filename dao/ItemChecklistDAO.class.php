@@ -11,7 +11,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class ItemChecklistDAO extends ConnDEV {
+class ItemChecklistDAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */

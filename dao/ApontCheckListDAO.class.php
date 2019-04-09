@@ -12,7 +12,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class ApontCheckListDAO extends ConnDEV {
+class ApontCheckListDAO extends Conn {
     //put your code here
 
     /** @var PDOStatement */
@@ -32,8 +32,6 @@ class ApontCheckListDAO extends ConnDEV {
 
             $select = " SELECT "
                     . " COUNT(ID) AS VERDATA "
-                    . " INTO "
-                    . " V_HORARIO "
                     . " FROM "
                     . " PERIODO_HORARIO_VERAO "
                     . " WHERE "

@@ -11,7 +11,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class AtividadeOSDAO extends ConnDEV {
+class AtividadeOSDAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */

@@ -11,7 +11,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class TurnoDAO extends ConnDEV {
+class TurnoDAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */

@@ -11,7 +11,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class CarregadeiraDAO extends ConnDEV {
+class CarregadeiraDAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */

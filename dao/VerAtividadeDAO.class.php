@@ -12,7 +12,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class VerAtividadeDAO extends ConnDEV {
+class VerAtividadeDAO extends Conn {
     //put your code here
 
     /** @var PDOStatement */
