@@ -1,8 +1,8 @@
 <?php
 
-require('./dao/ApontMotoMecDAO.class.php');
+require('./dao/ApontMotoMec2DAO.class.php');
 
-$apontMotoMecDAO = new ApontMotoMecDAO();
+$apontMotoMecDAO = new ApontMotoMec2DAO();
 $info = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 if (isset($info)):

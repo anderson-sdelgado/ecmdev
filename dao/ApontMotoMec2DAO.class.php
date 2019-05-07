@@ -6,13 +6,13 @@
  * and open the template in the editor.
  */
 require_once 'Conn.class.php';
-
+require_once 'AjusteDataHoraDAO.class.php';
 /**
  * Description of InsMotoMecDAO
  *
  * @author anderson
  */
-class ApontMotoMecDAO extends Conn {
+class ApontMotoMec2DAO extends Conn {
     //put your code here
 
     /** @var PDOStatement */
@@ -23,6 +23,8 @@ class ApontMotoMecDAO extends Conn {
 
     public function salvarDados($dados) {
 
+        $ajusteDataHoraDAO = new AjusteDataHoraDAO();
+        
         foreach ($dados as $d) {
 
             $sql = " INSERT INTO ECM_APONTAMENTO_MM "
@@ -38,7 +40,7 @@ class ApontMotoMecDAO extends Conn {
                     . " , " . $d->veic . ""
                     . " , " . $d->motorista . " "
                     . " , " . $d->opcor . " "
-                    . " , TO_DATE('" . $d->dihi . "','DD/MM/YYYY HH24:MI') "
+                    . " , " . $ajusteDataHoraDAO->dataHora($d->dihi)
                     . " , " . $d->caux . " )";
 
             $this->Conn = parent::getConn();

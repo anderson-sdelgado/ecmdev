@@ -1,8 +1,8 @@
 <?php
 
-require('./dao/ApontCheckListDAO.class.php');
+require('./dao/ApontCheckList2DAO.class.php');
 
-$apontCheckListDAO = new ApontCheckListDAO();
+$apontCheckListDAO = new ApontCheckList2DAO();
 $info = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 if (isset($info)):

@@ -6,13 +6,13 @@
  * and open the template in the editor.
  */
 require_once 'Conn.class.php';
-
+require_once 'AjusteDataHoraDAO.class.php';
 /**
  * Description of InsMotoMecDAO
  *
  * @author anderson
  */
-class ApontVCanaDAO extends Conn {
+class ApontVCana2DAO extends Conn {
     //put your code here
 
     /** @var PDOStatement */
@@ -23,6 +23,8 @@ class ApontVCanaDAO extends Conn {
 
     public function salvarDados($dados) {
 
+        $ajusteDataHoraDAO = new AjusteDataHoraDAO();
+        
         foreach ($dados as $d) {
 
             $insert = " INSERT INTO "
@@ -53,9 +55,9 @@ class ApontVCanaDAO extends Conn {
                     . " , " . $this->verifValor($d->libCarr3) . " "
                     . " , " . $this->verifValor($d->maqCarr3) . " "
                     . " , " . $this->verifValor($d->opCarr3) . " "
-                    . " , TO_DATE('" . $d->dataChegCampo . "' , 'DD/MM/YYYY HH24:MI') "
-                    . " , TO_DATE('" . $d->dataSaidaCampo . "' , 'DD/MM/YYYY HH24:MI') "
-                    . " , TO_DATE('" . $d->dataSaidaUsina . "' , 'DD/MM/YYYY HH24:MI') "
+                    . " , " . $ajusteDataHoraDAO->dataHora($d->dataChegCampo)
+                    . " , " . $ajusteDataHoraDAO->dataHora($d->dataSaidaCampo)
+                    . " , " . $ajusteDataHoraDAO->dataHora($d->dataSaidaUsina)
                     . " , " . $d->moto . " "
                     . " , " . $this->verifValor($d->turno) . " "
                     . " ) ";

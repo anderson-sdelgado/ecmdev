@@ -8,11 +8,11 @@
 require_once 'Conn.class.php';
 
 /**
- * Description of VerLiberacaoDAO
+ * Description of VerAtividade
  *
  * @author anderson
  */
-class VerLiberacaoDAO extends Conn {
+class VerAtiv2DAO extends Conn {
     //put your code here
 
     /** @var PDOStatement */
@@ -23,21 +23,14 @@ class VerLiberacaoDAO extends Conn {
 
     public function pesqInfo($dado) {
 
-        $posicao = strpos($dado, "_") + 1;
-        $lib = substr($dado, 0, ($posicao - 1));
-        $os = substr($dado, $posicao);
-
         $select = " SELECT DISTINCT "
-                . " NRO_LIB_OS AS \"codigoLiberacao\" "
-                . " , CD_TPCORTE AS \"tipoLiberacao\" "
-                . " , CARACTER(NOME_FAZENDA) AS \"nomeLiberacao\" "
-                . " , NRO_OS AS \"nroOSLiberacao\" "
+                . " OS.ID_ATIV_OS AS \"codigoAtivOS\" "
+                . " , OS.NRO_OS AS \"nroOSAtivOS\" "
+                . " , CARACTER(OS.NOME_FAZENDA) AS \"nomeAtivOS\" "
                 . " FROM "
-                . " USINAS.V_INTEGRA_LIBERACAO "
+                . " USINAS.V_INTEGRA_OS OS "
                 . " WHERE "
-                . " NRO_LIB_OS = " . $lib . " "
-                . " AND "
-                . " NRO_OS = " . $os . " ";
+                . " OS.ID_ATIV_OS = " . $dado;
 
 
         $this->Conn = parent::getConn();

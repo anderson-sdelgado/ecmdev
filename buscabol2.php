@@ -1,8 +1,8 @@
 <?php
 
-require('./dao/BuscaBoletimDAO.class.php');
+require('./dao/BuscaBoletim2DAO.class.php');
 
-$buscaBoletimDAO = new BuscaBoletimDAO();
+$buscaBoletimDAO = new BuscaBoletim2DAO();
 $info = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 if (isset($info)):

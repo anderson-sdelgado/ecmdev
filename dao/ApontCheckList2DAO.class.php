@@ -6,13 +6,13 @@
  * and open the template in the editor.
  */
 require_once 'Conn.class.php';
-
+require_once 'AjusteDataHoraDAO.class.php';
 /**
  * Description of ApontaCheckList
  *
  * @author anderson
  */
-class ApontCheckListDAO extends Conn {
+class ApontCheckList2DAO extends Conn {
     //put your code here
 
     /** @var PDOStatement */
@@ -24,6 +24,8 @@ class ApontCheckListDAO extends Conn {
     public function salvarDados($dadosCab, $dadosItem) {
 
         $this->Conn = parent::getConn();
+        
+        $ajusteDataHoraDAO = new AjusteDataHoraDAO();
 
         foreach ($dadosCab as $d) {
 
@@ -31,34 +33,11 @@ class ApontCheckListDAO extends Conn {
             $data = '';
 
             $select = " SELECT "
-                    . " COUNT(ID) AS VERDATA "
-                    . " FROM "
-                    . " PERIODO_HORARIO_VERAO "
-                    . " WHERE "
-                    . " TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI') BETWEEN  DATA_INICIAL AND DATA_FINAL";
-
-            $this->Read = $this->Conn->prepare($select);
-            $this->Read->setFetchMode(PDO::FETCH_ASSOC);
-            $this->Read->execute();
-            $result = $this->Read->fetchAll();
-
-            foreach ($result as $item) {
-                $v = $item['VERDATA'];
-            }
-
-            if ($v == 0) {
-                $data = ' - 3/24)';
-            }
-            else{
-                $data = ' - 2/24)';
-            }
-
-            $select = " SELECT "
                     . " COUNT(*) AS QTDE "
                     . " FROM "
                     . " BOLETIM_CHECK "
                     . " WHERE "
-                    . " DT = (TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI') " . $data 
+                    . " DT = " . $ajusteDataHoraDAO->dataHora($d->dtCabecCheckList)
                     . " AND "
                     . " EQUIP_NRO = " . $d->equipCabecCheckList . " ";
 
@@ -97,7 +76,7 @@ class ApontCheckListDAO extends Conn {
                         . " VALUES ( "
                         . " " . $d->equipCabecCheckList . " "
                         . " , " . $d->funcCabecCheckList . ""
-                        . " , (TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI')" . $data
+                        . " , " . $ajusteDataHoraDAO->dataHora($d->dtCabecCheckList)
                         . " , " . $turno . ")";
 
                 $this->Create = $this->Conn->prepare($sql);
@@ -108,7 +87,7 @@ class ApontCheckListDAO extends Conn {
                         . " FROM "
                         . " BOLETIM_CHECK "
                         . " WHERE "
-                        . " DT = (TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI')" . $data
+                        . " DT = " . $ajusteDataHoraDAO->dataHora($d->dtCabecCheckList)
                         . " AND "
                         . " EQUIP_NRO = " . $d->equipCabecCheckList . " ";
 
@@ -156,7 +135,7 @@ class ApontCheckListDAO extends Conn {
                                 . " FROM "
                                 . " ITEM_BOLETIM_CHECK "
                                 . " WHERE "
-                                . " ID_BOLETIM = " . $idCab . " "
+                                . " ID_BOLETIM = " . $idCab
                                 . " AND "
                                 . " ITMANPREV_ID = " . $i->idItItemCheckList . " ";
 
@@ -197,7 +176,7 @@ class ApontCheckListDAO extends Conn {
                         . " FROM "
                         . " BOLETIM_CHECK "
                         . " WHERE "
-                        . " DT = (TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI') " . $data
+                        . " DT = " . $ajusteDataHoraDAO->dataHora($d->dtCabecCheckList)
                         . " AND "
                         . " EQUIP_NRO = " . $d->equipCabecCheckList . " ";
 
@@ -245,7 +224,7 @@ class ApontCheckListDAO extends Conn {
                                 . " FROM "
                                 . " ITEM_BOLETIM_CHECK "
                                 . " WHERE "
-                                . " ID_BOLETIM = " . $idCab . " "
+                                . " ID_BOLETIM = " . $idCab
                                 . " AND "
                                 . " ITMANPREV_ID = " . $i->idItItemCheckList . " ";
 

@@ -1,8 +1,8 @@
 <?php
 
-require('./dao/BuscaBoletimViagemDAO.class.php');
+require('./dao/BuscaBoletimViagem2DAO.class.php');
 
-$buscaBoletimViagemDAO = new BuscaBoletimViagemDAO();
+$buscaBoletimViagemDAO = new BuscaBoletimViagem2DAO();
 $info = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 if (isset($info)):

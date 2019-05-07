@@ -8,11 +8,11 @@
 require_once 'Conn.class.php';
 
 /**
- * Description of VerAtividade
+ * Description of VerLiberacaoDAO
  *
  * @author anderson
  */
-class VerAtividadeDAO extends Conn {
+class VerLib2DAO extends Conn {
     //put your code here
 
     /** @var PDOStatement */
@@ -23,17 +23,24 @@ class VerAtividadeDAO extends Conn {
 
     public function pesqInfo($dado) {
 
-        $select = " SELECT DISTINCT "
-                . " OS.ID_ATIV_OS AS \"codigoAtivOS\" "
-                . " , OS.NRO_OS AS \"nroOSAtivOS\" "
-                . " , CARACTER(OS.NOME_FAZENDA) AS \"nomeAtivOS\" "
-                . " FROM "
-                . " USINAS.V_INTEGRA_OS OS "
-                . " WHERE "
-                . " OS.ID_ATIV_OS = " . $dado . " ";
-
-
         $this->Conn = parent::getConn();
+        
+        $posicao = strpos($dado, "_") + 1;
+        $lib = substr($dado, 0, ($posicao - 1));
+        $os = substr($dado, $posicao);
+
+        $select = " SELECT DISTINCT "
+                . " NRO_LIB_OS AS \"codigoLiberacao\" "
+                . " , CD_TPCORTE AS \"tipoLiberacao\" "
+                . " , CARACTER(NOME_FAZENDA) AS \"nomeLiberacao\" "
+                . " , NRO_OS AS \"nroOSLiberacao\" "
+                . " FROM "
+                . " USINAS.V_INTEGRA_LIBERACAO "
+                . " WHERE "
+                . " NRO_LIB_OS = " . $lib
+                . " AND "
+                . " NRO_OS = " . $os;
+
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
         $this->Read->execute();

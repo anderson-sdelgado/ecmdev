@@ -1,8 +1,8 @@
 <?php
 
-require('./dao/ApontVCanaDAO.class.php');
+require('./dao/ApontVCana2DAO.class.php');
 
-$apontVCanaDAO = new ApontVCanaDAO();
+$apontVCanaDAO = new ApontVCana2DAO();
 $info = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 if (isset($info)):
