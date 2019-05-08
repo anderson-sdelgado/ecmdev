@@ -1,8 +1,8 @@
 <?php
 
-require('./dao/FrenteDAO.class.php');
+require('./dao/Frente2DAO.class.php');
 
-$frenteDAO = new FrenteDAO();
+$frenteDAO = new Frente2DAO();
 
 //cria o array associativo
 $dados = array("dados"=>$frenteDAO->dados());

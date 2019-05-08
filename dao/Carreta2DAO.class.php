@@ -11,7 +11,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class CaminhaoDAO extends Conn {
+class Carreta2DAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */
@@ -23,21 +23,21 @@ class CaminhaoDAO extends Conn {
     public function dados() {
 
         $select = " SELECT "
-                    . " E.EQUIP_ID AS \"idCaminhao\" "
-                    . " , E.NRO AS \"codCaminhao\" "
-                    . " , E.TIPO_CLASSE AS \"tipoCaminhao\" "
-                    . " , NVL(C.PLMANPREV_ID, 0) AS \"idChecklist\" "
-                    . " , E.TPTUREQUIP_CD AS \"codTurno\" "
-                . " FROM "
-                    . " USINAS.V_INTEGRA_EQUIPAMENTO E "
-                    . " , USINAS.V_EQUIP_PLANO_CHECK C "
-                . " WHERE "
-                    . " E.TIPO_CLASSE IN (1, 6, 5) "
+                        . " EQUIP_ID AS \"idCarreta\" "
+                        . " , NRO AS \"codCarreta\" "
+                        . " , " 
+                        . " CASE " 
+                        . " WHEN NRO_CLASSE = 216 THEN 8 "
+                        . " ELSE TIPO_CLASSE "
+                        . " END AS \"tipoCarreta\" "
+                    . " FROM "
+                        . " USINAS.V_INTEGRA_EQUIPAMENTO "
+                    . " WHERE "
+                        . " (TIPO_CLASSE IN (4, 8) OR NRO_CLASSE = 212) "
                     . " AND "
-                    . " E.NRO = C.EQUIP_NRO(+) "
-                . " ORDER BY "
-                    . " NRO "
-                . " DESC ";
+                        . " DATA_DESATIVACAO IS NULL "
+                    . " ORDER BY NRO DESC "; 
+        
         
         $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);
@@ -46,6 +46,7 @@ class CaminhaoDAO extends Conn {
         $result = $this->Read->fetchAll();
 
         return $result;
+        
     }
     
 }

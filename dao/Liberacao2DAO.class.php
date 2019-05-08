@@ -11,7 +11,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class OSDAO extends Conn {
+class Liberacao2DAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */
@@ -22,11 +22,14 @@ class OSDAO extends Conn {
 
     public function dados() {
 
-        $select = " SELECT "
-                    . " IDATIV AS \"idOS\" "
-                    . ", IDOS AS \"idAtivOS\" "
-                . " FROM "
-                    . " ATIVIDADESOSCEL ";
+        $select = " SELECT DISTINCT "
+                        . " NRO_LIB_OS AS \"codigoLiberacao\" "
+                        . " , CD_TPCORTE AS \"tipoLiberacao\" "
+                        . " , CD_FAZENDA AS \"codFazendaLiberacao\" "
+                        . " , CARACTER(NOME_FAZENDA) AS \"nomeFazendaLiberacao\" "
+                        . " , NRO_OS AS \"nroOSLiberacao\" "
+                    . " FROM "
+                        . " USINAS.V_INTEGRA_LIBERACAO ";
         
         $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);

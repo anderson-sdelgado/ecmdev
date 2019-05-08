@@ -6,7 +6,6 @@
  * and open the template in the editor.
  */
 require_once 'Conn.class.php';
-
 /**
  * Description of AjusteDataHora
  *
@@ -22,6 +21,8 @@ class AjusteDataHoraDAO extends Conn {
 
     public function dataHora($dh) {
 
+        $this->Conn = parent::getConn();
+        
         $select = " SELECT "
                 . " COUNT(ID) AS VERDATA "
                 . " FROM "
@@ -39,9 +40,9 @@ class AjusteDataHoraDAO extends Conn {
         }
 
         if ($v == 0) {
-            $dthr = "(TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI') - 3/24)";
+            $dthr = "(TO_DATE('" . $dh . "','DD/MM/YYYY HH24:MI') - 3/24)";
         } else {
-            $dthr = "(TO_DATE('" . $d->dtCabecCheckList . "','DD/MM/YYYY HH24:MI') - 2/24)";
+            $dthr = "(TO_DATE('" . $dh . "','DD/MM/YYYY HH24:MI') - 2/24)";
         }
 
         return $dthr;

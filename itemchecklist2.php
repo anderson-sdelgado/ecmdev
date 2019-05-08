@@ -1,8 +1,8 @@
 <?php
 
-require('./dao/ItemChecklistDAO.class.php');
+require('./dao/ItemCheckList2DAO.class.php');
 
-$itemChecklistDAO = new ItemChecklistDAO();
+$itemChecklistDAO = new ItemCheckList2DAO();
 
 //cria o array associativo
 $dados = array("dados"=>$itemChecklistDAO->dados());

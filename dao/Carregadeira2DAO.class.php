@@ -11,7 +11,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class CarretaDAO extends Conn {
+class Carregadeira2DAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */
@@ -23,21 +23,14 @@ class CarretaDAO extends Conn {
     public function dados() {
 
         $select = " SELECT "
-                        . " EQUIP_ID AS \"idCarreta\" "
-                        . " , NRO AS \"codCarreta\" "
-                        . " , " 
-                        . " CASE " 
-                        . " WHEN NRO_CLASSE = 216 THEN 8 "
-                        . " ELSE TIPO_CLASSE "
-                        . " END AS \"tipoCarreta\" "
+                        . " NRO AS \"idCarregadeira\" "
                     . " FROM "
                         . " USINAS.V_INTEGRA_EQUIPAMENTO "
                     . " WHERE "
-                        . " (TIPO_CLASSE IN (4, 8) OR NRO_CLASSE = 212) "
-                    . " AND "
-                        . " DATA_DESATIVACAO IS NULL "
-                    . " ORDER BY NRO DESC "; 
-        
+                        . " TIPO_CLASSE = 3 "
+                    . " ORDER BY "
+                        . " NRO "
+                    . " DESC ";
         
         $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);
@@ -46,7 +39,6 @@ class CarretaDAO extends Conn {
         $result = $this->Read->fetchAll();
 
         return $result;
-        
     }
     
 }

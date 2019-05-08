@@ -1,11 +1,11 @@
 <?php
 
-require('./dao/LocalDAO.class.php');
+require('./dao/Carregadeira2DAO.class.php');
 
-$localDAO = new LocalDAO();
+$carregadeiraDAO = new Carregadeira2DAO();
 
 //cria o array associativo
-$dados = array("dados"=>$localDAO->dados());
+$dados = array("dados"=>$carregadeiraDAO->dados());
 
 //converte o conteúdo do array associativo para uma string JSON
 $json_str = json_encode($dados);

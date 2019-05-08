@@ -11,7 +11,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class NoteiroDAO extends Conn {
+class Local2DAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */
@@ -23,17 +23,13 @@ class NoteiroDAO extends Conn {
     public function dados() {
 
         $select = " SELECT "
-                    . " FM.FUNC_CD AS \"codNoteiro\" "
+                    . " CODIGO AS \"idLocal\" "
+                    . " , DESCRICAO AS \"descLocal\" "
                 . " FROM "
-                    . " V_SIMOVA_TURMA_FUNC TF "
-                    . " , V_SIMOVA_FUNC_MOBRA FM "
-                . " WHERE "
-                    . " TF.TURMA_ID <> 111 "
-                    . " AND "
-                    . " TF.FUNC_ID = FM.FUNC_ID  "
+                    . " ECM_LOCAL "
                 . " ORDER BY "
-                    . " FM.FUNC_CD "
-                . " DESC ";
+                    . " CODIGO "
+                . " ASC ";
         
         $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);

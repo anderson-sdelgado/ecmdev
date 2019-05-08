@@ -1,11 +1,11 @@
 <?php
 
-require('./dao/CaminhaoDAO.class.php');
+require('./dao/Carreta2DAO.class.php');
 
-$caminhaoDAO = new CaminhaoDAO();
+$carretaDAO = new Carreta2DAO();
 
 //cria o array associativo
-$dados = array("dados"=>$caminhaoDAO->dados());
+$dados = array("dados"=>$carretaDAO->dados());
 
 //converte o conteúdo do array associativo para uma string JSON
 $json_str = json_encode($dados);

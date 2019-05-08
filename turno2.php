@@ -1,8 +1,8 @@
 <?php
 
-require('./dao/TurnoDAO.class.php');
+require('./dao/Turno2DAO.class.php');
 
-$turnoDAO = new TurnoDAO();
+$turnoDAO = new Turno2DAO();
 
 //cria o array associativo
 $dados = array("dados"=>$turnoDAO->dados());

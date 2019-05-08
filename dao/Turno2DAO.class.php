@@ -11,7 +11,7 @@ require_once 'Conn.class.php';
  *
  * @author anderson
  */
-class LiberacaoDAO extends Conn {
+class Turno2DAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */
@@ -22,15 +22,14 @@ class LiberacaoDAO extends Conn {
 
     public function dados() {
 
-        $select = " SELECT DISTINCT "
-                        . " NRO_LIB_OS AS \"codigoLiberacao\" "
-                        . " , CD_TPCORTE AS \"tipoLiberacao\" "
-                        . " , CD_FAZENDA AS \"codFazendaLiberacao\" "
-                        . " , CARACTER(NOME_FAZENDA) AS \"nomeFazendaLiberacao\" "
-                        . " , NRO_OS AS \"nroOSLiberacao\" "
-                    . " FROM "
-                        . " USINAS.V_INTEGRA_LIBERACAO ";
-        
+        $select = " SELECT "
+                . " TURNOTRAB_ID AS \"idTurno\" "
+                . " , TPTUREQUIP_CD AS \"codTurno\" "
+                . " , NRO_TURNO AS \"nroTurno\" "
+                . " , 'TURNO ' || NRO_TURNO || ': ' || HR_INI || ' - ' || HR_FIM AS \"descTurno\" "
+                . " FROM "
+                . " USINAS.V_SIMOVA_TURNO_EQUIP_NEW ";
+
         $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);
@@ -38,6 +37,7 @@ class LiberacaoDAO extends Conn {
         $result = $this->Read->fetchAll();
 
         return $result;
+        
     }
     
 }
