@@ -5,8 +5,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once ('./dbutil/Conn.class.php');
-require_once('./model/dao/AjusteDataHoraDAO.class.php');
+require_once ('../dbutil/Conn.class.php');
+require_once ('../model/dao/AjusteDataHoraDAO.class.php');
 /**
  * Description of MotoristaDAO
  *
@@ -24,19 +24,40 @@ class MotoMecDAO extends Conn {
     public function dados() {
 
         $select = " SELECT "
-                    . " CODIGO AS \"codigoMotoMec\" "
-                    . " , OPCOR AS \"opcorMotoMec\" "
-                    . " , NOME AS \"nomeMotoMec\" "
-                    . " , POSOP AS \"posicaoMotoMec\" "
-                    . " , TIPO AS \"tipoMotoMec\" "
-                    . " , FUNCAO AS \"funcaoMotoMec\" "
-                    . " , CARGO AS \"cargoMotoMec\" "
-                . " FROM "
-                    . " ECM_OPER_MM "
-                . " ORDER BY "
-                    . " CODIGO "
-                . " DESC ";
-        
+                . " OP.ID AS \"idOperMotoMec\" "
+                . " , CASE "
+                    . " WHEN OP.MOTPARADA_ID IS NOT NULL AND AA.ATIVAGR_ID IS NULL "
+                    . " THEN MP.CD "
+                    . " WHEN OP.MOTPARADA_ID IS NULL AND AA.ATIVAGR_ID IS NOT NULL "
+                    . " THEN AA.CD "
+                    . " ELSE 0 "
+                    . " END AS \"codOperMotoMec\" "
+                . " , CASE "
+                    . " WHEN FUNCAO_COD = 1 "
+                    . " THEN MP.DESCR "
+                    . " ELSE FUOP.DESCR "
+                    . " END AS \"descrOperMotoMec\" "
+                . " , OP.FUNCAO_COD AS \"codFuncaoOperMotoMec\" "
+                . " , OP.POSICAO AS \"posOperMotoMec\" "
+                . " , OP.TIPO AS \"tipoOperMotoMec\" "
+                . " , OP.APLIC AS \"aplicOperMotoMec\" "
+                . " FROM " 
+                . " OPCAO_MOTOMEC OP "
+                . " , FUNCAO_OPCAO_MOTOMEC FUOP "
+                . " , MOTIVO_PARADA MP "
+                . " , ATIV_AGR AA "
+                . " WHERE "
+                . " OP.FUNCAO_COD = FUOP.COD "
+                . " AND "
+                . " OP.APLIC = FUOP.APLIC "
+                . " AND "
+                . " OP.MOTPARADA_ID = MP.MOTPARADA_ID(+) "
+                . " AND "
+                . " OP.ATIVAGR_ID = AA.ATIVAGR_ID(+) "
+                . " ORDER BY " 
+                . " OP.ID " 
+                . " ASC ";
+  
         $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);
         $this->Read->setFetchMode(PDO::FETCH_ASSOC);

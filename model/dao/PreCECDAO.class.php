@@ -37,28 +37,28 @@ class PreCECDAO extends Conn {
                 . " ) "
                 . " VALUES ( "
                 . " ECM_PRE_CEC_CANA_SEQ.NEXTVAL "
-                . " , " . $d->cam . " "
-                . " , " . $this->verifValor($d->libCam) . " "
-                . " , " . $this->verifValor($d->maqCam) . " "
-                . " , " . $this->verifValor($d->opCam) . " "
-                . " , " . $d->moto . " "
-                . " , " . $this->verifValor($d->carr1) . " "
-                . " , " . $this->verifValor($d->libCarr1) . " "
-                . " , " . $this->verifValor($d->maqCarr1) . " "
-                . " , " . $this->verifValor($d->opCarr1) . " "
-                . " , " . $this->verifValor($d->carr2) . " "
-                . " , " . $this->verifValor($d->libCarr2) . " "
-                . " , " . $this->verifValor($d->maqCarr2) . " "
-                . " , " . $this->verifValor($d->opCarr2) . " "
-                . " , " . $this->verifValor($d->carr3) . " "
-                . " , " . $this->verifValor($d->libCarr3) . " "
-                . " , " . $this->verifValor($d->maqCarr3) . " "
-                . " , " . $this->verifValor($d->opCarr3) . " "
+                . " , " . $d->cam
+                . " , " . $this->verifValor($d->libCam)
+                . " , " . $this->verifValor($d->maqCam)
+                . " , " . $this->verifValor($d->opCam)
+                . " , " . $d->moto
+                . " , " . $this->verifValor($d->carr1)
+                . " , " . $this->verifValor($d->libCarr1)
+                . " , " . $this->verifValor($d->maqCarr1)
+                . " , " . $this->verifValor($d->opCarr1)
+                . " , " . $this->verifValor($d->carr2)
+                . " , " . $this->verifValor($d->libCarr2)
+                . " , " . $this->verifValor($d->maqCarr2)
+                . " , " . $this->verifValor($d->opCarr2)
+                . " , " . $this->verifValor($d->carr3)
+                . " , " . $this->verifValor($d->libCarr3)
+                . " , " . $this->verifValor($d->maqCarr3)
+                . " , " . $this->verifValor($d->opCarr3)
                 . " , " . $ajusteDataHoraDAO->dataHoraGMT($d->dataChegCampo)
                 . " , " . $ajusteDataHoraDAO->dataHoraGMT($d->dataSaidaCampo)
                 . " , " . $ajusteDataHoraDAO->dataHoraGMT($d->dataSaidaUsina)
-                . " , " . $d->moto . " "
-                . " , " . $this->verifValor($d->turno) . " "
+                . " , " . $d->moto
+                . " , " . $this->verifValor($d->turno)
                 . " ) ";
 
         $this->Conn = parent::getConn();

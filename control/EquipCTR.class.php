@@ -5,13 +5,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once('./model/dao/FrenteDAO.class.php');
+require_once('../model/dao/EquipDAO.class.php');
 /**
- * Description of FreteCTR
+ * Description of EquipCTR
  *
  * @author anderson
  */
-class FrenteCTR {
+class EquipCTR {
     //put your code here
     
     public function dados($versao) {
@@ -20,9 +20,9 @@ class FrenteCTR {
         
         if($versao >= 2.00){
         
-            $frenteDAO = new FrenteDAO();
+            $equipDAO = new EquipDAO();
 
-            $dados = array("dados"=>$frenteDAO->dados());
+            $dados = array("dados"=>$equipDAO->dados());
             $json_str = json_encode($dados);
 
             return $json_str;

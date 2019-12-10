@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once ('./dbutil/Conn.class.php');
+require_once ('../dbutil/Conn.class.php');
 /**
  * Description of ItemChecklistDAO
  *
@@ -30,7 +30,7 @@ class ItemCheckListDAO extends Conn {
                     . " FROM "
                         . " V_ITEM_PLANO_CHECK "
                     . " ORDER BY "
-                            . " SEQ "
+                         . " SEQ "
                     . " ASC ";
 
         $this->Conn = parent::getConn();

@@ -11,7 +11,7 @@ require_once ('./dbutil/Conn.class.php');
  *
  * @author anderson
  */
-class OSDAO extends Conn {
+class ColabDAO extends Conn {
     //put your code here
     
     /** @var PDOStatement */
@@ -23,10 +23,15 @@ class OSDAO extends Conn {
     public function dados() {
 
         $select = " SELECT "
-                    . " IDATIV AS \"idOS\" "
-                    . ", IDOS AS \"idAtivOS\" "
+                    . " MATRICULA AS \"matricColab\" "
+                    . " , NOME AS \"nomeColab\" "
                 . " FROM "
-                    . " ATIVIDADESOSCEL ";
+                    . " USINAS.V_INTEGRA_FUNCIONARIO "
+                . " WHERE "
+                    . " CODIGO_MACRO_FUNCAO = 1 "
+                . " ORDER BY "
+                    . " MATRICULA "
+                . " DESC ";
         
         $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);

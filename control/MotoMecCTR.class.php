@@ -16,14 +16,21 @@ class MotoMecCTR {
 
     //put your code here
 
-    public function dados() {
+    public function dados($versao) {
 
-        $motoMecDAO = new MotoMecDAO();
+        $versao = str_replace("_", ".", $versao);
+        
+        if($versao >= 2.00){
+        
+            $motoMecDAO = new MotoMecDAO();
 
-        $dados = array("dados" => $motoMecDAO->dados());
-        $json_str = json_encode($dados);
+            $dados = array("dados" => $motoMecDAO->dados());
+            $json_str = json_encode($dados);
 
-        return $json_str;
+            return $json_str;
+        
+        }
+        
     }
 
     public function salvarDados($info, $pagina) {

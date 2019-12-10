@@ -98,6 +98,7 @@ class CabecCheckListDAO extends Conn {
                 . " , " . $ajusteDataHoraDAO->dataHoraGMT($cab->dtCabecCheckList)
                 . " , " . $turno . ")";
 
+		$this->Conn = parent::getConn();
         $this->Create = $this->Conn->prepare($sql);
         $this->Create->execute();
     }

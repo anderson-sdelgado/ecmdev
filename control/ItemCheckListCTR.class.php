@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once('./model/dao/ItemCheckListDAO.class.php');
+require_once('../model/dao/ItemCheckListDAO.class.php');
 /**
  * Description of ItemCheckListCTR
  *
@@ -14,14 +14,20 @@ require_once('./model/dao/ItemCheckListDAO.class.php');
 class ItemCheckListCTR {
     //put your code here
     
-    public function dados() {
+    public function dados($versao) {
         
-        $itemCheckListDAO = new ItemCheckListDAO();
-       
-        $dados = array("dados"=>$itemCheckListDAO->dados());
-        $json_str = json_encode($dados);
+        $versao = str_replace("_", ".", $versao);
         
-        return $json_str;
+        if($versao >= 2.00){
+        
+            $itemCheckListDAO = new ItemCheckListDAO();
+
+            $dados = array("dados"=>$itemCheckListDAO->dados());
+            $json_str = json_encode($dados);
+
+            return $json_str;
+        
+        }
         
     }
     

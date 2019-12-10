@@ -23,13 +23,12 @@ class ROSAtivDAO extends Conn {
     public function dados() {
 
         $select = " SELECT DISTINCT "
-                            . " OS.ID_ATIV_OS AS \"codigoAtivOS\" "
-                            . " , OS.NRO_OS AS \"nroOSAtivOS\" "
-                            . " , OS.CD_FAZENDA AS \"codFazendaAtivOS\" "
-                            . " , CARACTER(OS.NOME_FAZENDA) AS \"nomeFazendaAtivOS\" "
+                            . " OS.ID_ATIV_OS AS \"idRAtivOS\" "
+                            . " , OS.NRO_OS AS \"nroOS\" "
+                            . " , OS.CD_FAZENDA AS \"codFazenda\" "
+                            . " , CARACTER(OS.NOME_FAZENDA) AS \"descrFazenda\" "
                         . " FROM "
                             . " USINAS.V_INTEGRA_OS OS ";
-
         
         $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);
@@ -50,7 +49,6 @@ class ROSAtivDAO extends Conn {
                 . " USINAS.V_INTEGRA_OS OS "
                 . " WHERE "
                 . " OS.ID_ATIV_OS = " . $os;
-
 
         $this->Conn = parent::getConn();
         $this->Read = $this->Conn->prepare($select);

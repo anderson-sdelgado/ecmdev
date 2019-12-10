@@ -5,21 +5,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once('./model/dao/ROSAtivDAO.class.php');
+require_once('./model/dao/RAtivOSDAO.class.php');
 /**
  * Description of ROSAtiv
  *
  * @author anderson
  */
-class ROSAtivCTR {
+class RAtivOSCTR {
 
     //put your code here
 
     public function dados() {
 
-        $rOSAtivDAO = new ROSAtivDAO();
+        $rAtivOSDAO = new RAtivOSDAO();
 
-        $dados = array("dados" => $rOSAtivDAO->dados());
+        $dados = array("dados" => $rAtivOSDAO->dados());
         $json_str = json_encode($dados);
 
         return $json_str;
@@ -27,11 +27,11 @@ class ROSAtivCTR {
 
     public function pesqInfo($info) {
 
-        $rOSAtivDAO = new ROSAtivDAO();
+        $rAtivOSDAO = new RAtivOSDAO();
         
         $dado = $info['dado'];
         
-        $dados = array("dados" => $rOSAtivDAO->pesqInfo($dado));
+        $dados = array("dados" => $rAtivOSDAO->pesqInfo($dado));
         $json_str = json_encode($dados);
         
         return $json_str;
