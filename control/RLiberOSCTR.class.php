@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once('./model/dao/ROSLiberDAO.class.php');
+require_once('../model/dao/RLiberOSDAO.class.php');
 /**
  * Description of ROSLiberCTR
  *

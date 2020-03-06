@@ -5,9 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once('./model/dao/CECDAO.class.php');
-require_once('./model/dao/PreCECDAO.class.php');
-require_once('./model/dao/InserirLogDAO.class.php');
+require_once('../model/dao/CECDAO.class.php');
+require_once('../model/dao/PreCECDAO.class.php');
+require_once('../model/dao/InserirLogDAO.class.php');
 /**
  * Description of CECCTR
  *

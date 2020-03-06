@@ -2,7 +2,7 @@
 
 $versao = filter_input(INPUT_GET, 'versao', FILTER_DEFAULT);
 
-require_once('../control/ROSLiberCTR.class.php');
+require_once('../control/RLiberOSCTR.class.php');
 
 $rOSLiberCTR = new ROSLiberCTR();
 
